@@ -1,0 +1,29 @@
+<!-- the cube that the youbot will pick & place -->
+
+<?xml version="1.0"?>
+<sdf version="1.9">
+  <model name="cube">
+    <pose>0.5 0.0 0.02 0 0 0</pose>
+    <link name="link">
+      <inertial>
+        <mass>0.1</mass>
+        <inertia>
+          <ixx>1.67e-5</ixx><iyy>1.67e-5</iyy><izz>1.67e-5</izz>
+        </inertia>
+      </inertial>
+      <collision name="collision">
+        <geometry><box><size>0.02 0.02 0.02</size></box></geometry>
+        <surface>
+          <friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction>
+        </surface>
+      </collision>
+      <visual name="visual">
+        <geometry><box><size>0.02 0.02 0.02</size></box></geometry>
+        <material>
+          <ambient>1 0 0 1</ambient>
+          <diffuse>1 0 0 1</diffuse>
+        </material>
+      </visual>
+    </link>
+  </model>
+</sdf>
