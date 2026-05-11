@@ -19,23 +19,23 @@ from launch_ros.parameter_descriptions import ParameterValue
 import xacro
 
 """
-blackbird_gz.launch.py
+youbot_gz.launch.py
 """
 
 def generate_launch_description():
     use_sim_time = LaunchConfiguration('use_sim_time', default=True)
 
-    blackbird_ros2_path = get_package_share_directory('blackbird_ros2')
+    youbot_gz_path = get_package_share_directory('youbot_gz')
 
-    # blackbird_ros2_path = <workspace>/install/blackbird_ros2/share/blackbird_ros2
-    blackbird_install = os.path.dirname(os.path.dirname(blackbird_ros2_path))  # <workspace>/install/blackbird_ros2
-    workspace_src = os.path.join(os.path.dirname(os.path.dirname(blackbird_install)), 'src')  # <workspace>/src
+    # youbot_gz_path = <workspace>/install/youbot_gz/share/youbot_gz
+    youbot_install = os.path.dirname(os.path.dirname(youbot_gz_path))  # <workspace>/install/youbot_gz
+    workspace_src = os.path.join(os.path.dirname(os.path.dirname(youbot_install)), 'src')  # <workspace>/src
 
 
 
-    controller_config = os.path.join(blackbird_ros2_path, 'config', 'blackbird_effort_controller.yaml')
+    controller_config = os.path.join(youbot_gz_path, 'config', 'youbot_effort_controller.yaml')
 
-    urdf_file = os.path.join(blackbird_ros2_path, 'urdf', 'blackbird_gz.urdf')
+    urdf_file = os.path.join(youbot_gz_path, 'urdf', 'youbot.urdf.xacro')
     doc = xacro.process_file(urdf_file, mappings={'controller_config': controller_config})
 
     params = {
@@ -55,7 +55,7 @@ def generate_launch_description():
         executable='create',
         output='screen',
         arguments=['-string', doc.toxml(),
-                   '-name', 'blackbird',
+                   '-name', 'youbot',
                    '-allow_renaming', 'true',
                    '-x', '0.0',
                    '-y', '0.0',
@@ -77,10 +77,10 @@ def generate_launch_description():
     return LaunchDescription([
             
         SetEnvironmentVariable('GZ_SIM_RESOURCE_PATH',
-            workspace_src + ':' + os.path.dirname(blackbird_ros2_path)),
+            workspace_src + ':' + os.path.dirname(youbot_gz_path)),
 
         SetEnvironmentVariable('GZ_SIM_SYSTEM_PLUGIN_PATH',
-            os.path.join(os.path.expanduser('~'), 'ros2_ws', 'install', 'blackbird_ros2', 'lib', 'blackbird_ros2')),
+            os.path.join(os.path.expanduser('~'), 'ros2_ws', 'install', 'youbot_gz', 'lib', 'youbot_gz')),
 
         # Launch gazebo environment
         IncludeLaunchDescription(
