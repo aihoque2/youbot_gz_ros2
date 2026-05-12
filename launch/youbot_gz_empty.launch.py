@@ -27,9 +27,6 @@ def generate_launch_description():
 
     youbot_gz_path = get_package_share_directory('youbot_gz')
 
-    world_file = os.path.join(youbot_gz_path, 'world', 'empty_with_box.sdf')
-
-
     # youbot_gz_path = <workspace>/install/youbot_gz/share/youbot_gz
     youbot_install = os.path.dirname(os.path.dirname(youbot_gz_path))  # <workspace>/install/youbot_gz
     workspace_src = os.path.join(os.path.dirname(os.path.dirname(youbot_install)), 'src')  # <workspace>/src
@@ -62,7 +59,7 @@ def generate_launch_description():
                    '-allow_renaming', 'true',
                    '-x', '0.0',
                    '-y', '0.0',
-                   '-z', '0.12'],
+                   '-z', '1.10'],
     )
 
     #### TODO: Add ros2_control launch nodes for youbot control
@@ -80,16 +77,17 @@ def generate_launch_description():
     return LaunchDescription([
             
         SetEnvironmentVariable('GZ_SIM_RESOURCE_PATH',
-            workspace_src + ':' + 
-            os.path.dirname(youbot_gz_path) + ':' +
-            os.path.join(youbot_gz_path, 'world')),
+            workspace_src + ':' + os.path.dirname(youbot_gz_path)),
+
+        SetEnvironmentVariable('GZ_SIM_SYSTEM_PLUGIN_PATH',
+            os.path.join(os.path.expanduser('~'), 'ros2_ws', 'install', 'youbot_gz', 'lib', 'youbot_gz')),
 
         # Launch gazebo environment
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource(
                 [os.path.join(get_package_share_directory('ros_gz_sim'),
                               'launch', 'gz_sim.launch.py')]),
-            launch_arguments=[('gz_args', [' -r -v 4 ', world_file])]), # remove -r to pause sim
+            launch_arguments=[('gz_args', [' -r -v 4 empty.sdf'])]), # remove -r to pause sim
 
 
         robot_state_publisher,
