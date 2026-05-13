@@ -265,8 +265,6 @@
       </collision>
     </link>
 
-    <!-- extensions -->
-    <xacro:youbot_base_gazebo/>
 
   </xacro:macro>
 </robot>

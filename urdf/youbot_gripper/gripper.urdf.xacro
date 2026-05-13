@@ -111,9 +111,6 @@
 			</collision>
 		</link>
 
-		
-		<!-- extensions -->
-		<xacro:youbot_gripper_gazebo name="${name}" />
 	</xacro:macro>
 
 </robot>

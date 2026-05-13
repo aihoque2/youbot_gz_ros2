@@ -237,9 +237,6 @@
 			</collision>
 		</link>
 
-		<!-- extensions -->
-		<xacro:youbot_arm_gazebo name="${name}" />
-
 	</xacro:macro>
 
 </robot>

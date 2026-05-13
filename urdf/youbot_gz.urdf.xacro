@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<robot name="youbot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+<!-- youbot_gz.urdf.xacro -->
+<xacro:include filename="$(find youbot_gz)/urdf/youbot.urdf.xacro"/>  <!-- full kinematic tree -->
+
+<!-- gazebo overlays -->
+<xacro:include filename="$(find youbot_gz)/urdf/youbot_base/base.gazebo.xacro"/>
+<!-- ... call the macro ... -->
+<xacro:youbot_base_gazebo/>
+
+<!-- gz_ros2_control plugin -->
+<gazebo>
+  <plugin .../>
+</gazebo>
+
+<!-- ros2_control hardware interfaces -->
+<xacro:include filename="..."/>
+</robot>

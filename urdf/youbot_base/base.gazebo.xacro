@@ -1,49 +1,64 @@
 <?xml version="1.0"?>
-<robot xmlns:sensor="http://playerstage.sourceforge.net/gazebo/xmlschema/#sensor"
-       xmlns:controller="http://playerstage.sourceforge.net/gazebo/xmlschema/#controller"
-       xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface"
-       xmlns:xacro="http://www.ros.org/wiki/xacro/#interface">
-
+<robot>
 
   <xacro:macro name="youbot_base_gazebo">
-    <gazebo reference="youbot_base">
+    <gazebo reference="youbot_base_link">
     </gazebo>
 
-    <!-- front left wheel -->
+    <!-- ===== MECANUM WHEEL FRICTION VECTORS ===== -->
+    <!-- FL: rollers at +45 deg, fdir1 in roller-free direction (perpendicular to roller axis) -->
+    <!-- High mu2 = high resistance to lateral slip (simulates roller constraint)             -->
+    <!-- Low mu  = free rolling in the fdir1 direction                                        -->
+
+    <!-- front left: +45 deg rollers -->
     <gazebo reference="wheel_link_fl">
       <kp>1000000</kp>
       <kd>100</kd>
-    </gazebo>
-    
-    <gazebo reference="caster_link_fl">
+      <mu>0.5</mu>
+      <mu2>100.0</mu2>
+      <fdir1>0.707107 0.707107 0</fdir1>
+      <minDepth>0.001</minDepth>
+      <maxContacts>1</maxContacts>
     </gazebo>
 
-    <!-- front right wheel -->
+    <!-- front right: -45 deg rollers -->
     <gazebo reference="wheel_link_fr">
       <kp>1000000</kp>
       <kd>100</kd>
-    </gazebo>
-    
-    <gazebo reference="caster_link_fr">   
+      <mu>0.5</mu>
+      <mu2>100.0</mu2>
+      <fdir1>0.707107 -0.707107 0</fdir1>
+      <minDepth>0.001</minDepth>
+      <maxContacts>1</maxContacts>
     </gazebo>
 
-    <!-- back left wheel -->
+    <!-- back left: -45 deg rollers (same as FR) -->
     <gazebo reference="wheel_link_bl">
       <kp>1000000</kp>
       <kd>100</kd>
-    </gazebo>
-    
-    <gazebo reference="caster_link_bl">
+      <mu>0.5</mu>
+      <mu2>100.0</mu2>
+      <fdir1>0.707107 -0.707107 0</fdir1>
+      <minDepth>0.001</minDepth>
+      <maxContacts>1</maxContacts>
     </gazebo>
 
-    <!-- back right wheel -->
+    <!-- back right: +45 deg rollers (same as FL) -->
     <gazebo reference="wheel_link_br">
       <kp>1000000</kp>
       <kd>100</kd>
+      <mu>0.5</mu>
+      <mu2>100.0</mu2>
+      <fdir1>0.707107 0.707107 0</fdir1>
+      <minDepth>0.001</minDepth>
+      <maxContacts>1</maxContacts>
     </gazebo>
-    
-    <gazebo reference="caster_link_br">
-    </gazebo>
+
+    <!-- casters: free-spinning, no friction tuning needed -->
+    <gazebo reference="caster_link_fl"/>
+    <gazebo reference="caster_link_fr"/>
+    <gazebo reference="caster_link_bl"/>
+    <gazebo reference="caster_link_br"/>
 
   </xacro:macro>
 
