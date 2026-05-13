@@ -5,7 +5,6 @@
         xmlns:xacro="http://www.ros.org/wiki/xacro/#interface">
 
 	<xacro:include filename="$(find youbot_gz)/urdf/youbot_arm/arm.gazebo.xacro" />
-	<xacro:include filename="$(find youbot_gz)/urdf/youbot_arm/arm.transmission.xacro" />
 	<xacro:include filename="$(find youbot_gz)/urdf/youbot_arm/limits.urdf.xacro" />
 
 	<xacro:macro name="youbot_arm" params="parent name *origin">
@@ -240,7 +239,6 @@
 
 		<!-- extensions -->
 		<xacro:youbot_arm_gazebo name="${name}" />
-		<xacro:youbot_arm_transmission name="${name}" />
 
 	</xacro:macro>
 

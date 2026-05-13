@@ -5,7 +5,6 @@
        xmlns:xacro="http://www.ros.org/wiki/xacro/#interface">
 
 	<xacro:include filename="$(find youbot_gz)/urdf/youbot_gripper/gripper.gazebo.xacro" />
-	<xacro:include filename="$(find youbot_gz)/urdf/youbot_gripper/gripper.transmission.xacro" />
 	<xacro:include filename="$(find youbot_gz)/urdf/youbot_gripper/limits.urdf.xacro" />
 
 	<xacro:macro name="youbot_gripper" params="parent name *origin">
@@ -115,8 +114,6 @@
 		
 		<!-- extensions -->
 		<xacro:youbot_gripper_gazebo name="${name}" />
-		<xacro:youbot_gripper_transmission name="${name}" />
-
 	</xacro:macro>
 
 </robot>
