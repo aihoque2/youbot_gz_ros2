@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <ros2_control name="youbot_gripper" type="system">
+    <hardware>
+      <plugin>gz_ros2_control/GazeboSimSystem</plugin>
+    </hardware>
+
+    <!-- gripper_palm_joint is fixed, not listed -->
+    <joint name="gripper_finger_joint_l">
+      <command_interface name="effort">
+        <param name="min">-1.0</param>
+        <param name="max">1.0</param>
+      </command_interface>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+    <joint name="gripper_finger_joint_r">
+      <command_interface name="effort">
+        <param name="min">-1.0</param>
+        <param name="max">1.0</param>
+      </command_interface>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+
+  </ros2_control>
+
+</robot>

@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- Gazebo-specific properties for the gripper links -->
+  <!-- Populate with <gazebo reference="gripper_*"> blocks as needed -->
+
+</robot>

@@ -1,0 +1,68 @@
+controller_manager:
+  ros__parameters:
+    update_rate: 100
+
+    joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcaster
+
+    wheel_effort_controller:
+      type: effort_controllers/JointGroupEffortController
+
+    arm_joint_1_position_controller:
+      type: effort_controllers/JointPositionController
+    arm_joint_2_position_controller:
+      type: effort_controllers/JointPositionController
+    arm_joint_3_position_controller:
+      type: effort_controllers/JointPositionController
+    arm_joint_4_position_controller:
+      type: effort_controllers/JointPositionController
+    arm_joint_5_position_controller:
+      type: effort_controllers/JointPositionController
+
+    gripper_finger_joint_l_position_controller:
+      type: effort_controllers/JointPositionController
+    gripper_finger_joint_r_position_controller:
+      type: effort_controllers/JointPositionController
+
+wheel_effort_controller:
+  ros__parameters:
+    joints:
+      - wheel_joint_fl
+      - wheel_joint_fr
+      - wheel_joint_bl
+      - wheel_joint_br
+
+arm_joint_1_position_controller:
+  ros__parameters:
+    joint: arm_joint_1
+    pid: {p: 10.0, i: 0.0, d: 2.0}
+
+arm_joint_2_position_controller:
+  ros__parameters:
+    joint: arm_joint_2
+    pid: {p: 10.0, i: 0.0, d: 2.0}
+
+arm_joint_3_position_controller:
+  ros__parameters:
+    joint: arm_joint_3
+    pid: {p: 10.0, i: 0.0, d: 2.0}
+
+arm_joint_4_position_controller:
+  ros__parameters:
+    joint: arm_joint_4
+    pid: {p: 10.0, i: 0.0, d: 2.0}
+
+arm_joint_5_position_controller:
+  ros__parameters:
+    joint: arm_joint_5
+    pid: {p: 10.0, i: 0.0, d: 2.0}
+
+gripper_finger_joint_l_position_controller:
+  ros__parameters:
+    joint: gripper_finger_joint_l
+    pid: {p: 10.0, i: 0.0, d: 2.0}
+
+gripper_finger_joint_r_position_controller:
+  ros__parameters:
+    joint: gripper_finger_joint_r
+    pid: {p: 10.0, i: 0.0, d: 2.0}

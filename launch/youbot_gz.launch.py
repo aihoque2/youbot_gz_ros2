@@ -36,9 +36,9 @@ def generate_launch_description():
 
 
 
-    controller_config = os.path.join(youbot_gz_path, 'config', 'youbot_effort_controller.yaml')
+    controller_config = os.path.join(youbot_gz_path, 'config', 'youbot_controllers.yaml')
 
-    urdf_file = os.path.join(youbot_gz_path, 'urdf', 'youbot.urdf.xacro')
+    urdf_file = os.path.join(youbot_gz_path, 'urdf', 'youbot_gz.urdf.xacro')
     doc = xacro.process_file(urdf_file, mappings={'controller_config': controller_config})
 
     params = {
@@ -66,16 +66,16 @@ def generate_launch_description():
     )
 
     #### TODO: Add ros2_control launch nodes for youbot control
-    # load_joint_state_broadcaster = ExecuteProcess(
-    #     cmd=['ros2', 'control', 'load_controller', '--set-state', 'active',
-    #          'joint_state_broadcaster'],
-    #     output='screen'
-    # )
+    load_joint_state_broadcaster = ExecuteProcess(
+        cmd=['ros2', 'control', 'load_controller', '--set-state', 'active',
+             'joint_state_broadcaster'],
+        output='screen'
+    )
 
-    # load_joint_effort_controller = ExecuteProcess(
-    #     cmd=['ros2', 'control', 'load_controller', '--set-state', 'active', 'effort_controller'],
-    #     output='screen'
-    # )
+    load_joint_effort_controller = ExecuteProcess(
+        cmd=['ros2', 'control', 'load_controller', '--set-state', 'active', 'effort_controller'],
+        output='screen'
+    )
 
     return LaunchDescription([
             
@@ -91,6 +91,18 @@ def generate_launch_description():
                               'launch', 'gz_sim.launch.py')]),
             launch_arguments=[('gz_args', [' -r -v 4 ', world_file])]), # remove -r to pause sim
 
+        RegisterEventHandler(
+            event_handler=OnProcessExit(
+                target_action=spawn_entity,
+                on_exit=[load_joint_state_broadcaster],
+            )
+        ),
+        RegisterEventHandler(
+            event_handler=OnProcessExit(
+                target_action=load_joint_state_broadcaster,
+                on_exit=[load_joint_effort_controller],
+            )
+        ),
 
         robot_state_publisher,
         spawn_entity,

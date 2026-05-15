@@ -1,18 +1,24 @@
 <?xml version="1.0"?>
 <robot name="youbot" xmlns:xacro="http://www.ros.org/wiki/xacro">
-<!-- youbot_gz.urdf.xacro -->
-<xacro:include filename="$(find youbot_gz)/urdf/youbot.urdf.xacro"/>  <!-- full kinematic tree -->
+  <xacro:arg name="controller_config" default="$(find youbot_gz)/config/youbot_controllers.yaml"/>
 
-<!-- gazebo overlays -->
-<xacro:include filename="$(find youbot_gz)/urdf/youbot_base/base.gazebo.xacro"/>
-<!-- ... call the macro ... -->
-<xacro:youbot_base_gazebo/>
+  <!-- full kinematic tree (includes base.gazebo.xacro transitively) -->
+  <xacro:include filename="$(find youbot_gz)/urdf/youbot.urdf.xacro"/>
 
-<!-- gz_ros2_control plugin -->
-<gazebo>
-  <plugin .../>
-</gazebo>
+  <!-- invoke mecanum friction macro defined in base.gazebo.xacro -->
+  <xacro:youbot_base_gazebo/>
 
-<!-- ros2_control hardware interfaces -->
-<xacro:include filename="..."/>
+  <!-- gz_ros2_control plugin -->
+  <gazebo>
+    <plugin filename="gz_ros2_control-system"
+            name="gz_ros2_control::GazeboSimROS2ControlPlugin">
+      <parameters>$(arg controller_config)</parameters>
+    </plugin>
+  </gazebo>
+
+  <!-- ros2_control hardware interfaces -->
+  <xacro:include filename="$(find youbot_gz)/urdf/ros2_control/base_control.xacro"/>
+  <xacro:include filename="$(find youbot_gz)/urdf/ros2_control/arm_control.xacro"/>
+  <xacro:include filename="$(find youbot_gz)/urdf/ros2_control/gripper_control.xacro"/>
+
 </robot>
