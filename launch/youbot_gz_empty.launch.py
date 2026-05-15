@@ -73,7 +73,7 @@ def generate_launch_description():
     )
 
     load_joint_effort_controller = ExecuteProcess(
-        cmd=['ros2', 'control', 'load_controller', '--set-state', 'active', 'effort_controller'],
+        cmd=['ros2', 'control', 'load_controller', '--set-state', 'active', 'wheel_effort_controller'],
         output='screen'
     )
 
@@ -94,7 +94,7 @@ def generate_launch_description():
                 on_exit=[load_joint_state_broadcaster],
             )
         ),
-        
+
         RegisterEventHandler(
             event_handler=OnProcessExit(
                 target_action=load_joint_state_broadcaster,
