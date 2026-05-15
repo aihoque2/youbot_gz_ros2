@@ -1,7 +1,8 @@
 <?xml version="1.0"?>
 <sdf version="1.9">
-  <world name="empty_with_box">
+  <world name="empty_bullet">
 
+    <!--needs the bullet physics for mecanum wheels-->
     <physics name="1ms" type="bullet">
       <max_step_size>0.001</max_step_size>
       <real_time_factor>1.0</real_time_factor>
@@ -40,25 +41,6 @@
       </link>
     </model>
 
-    <!-- include the cube model -->
-    <include>
-      <uri>package://youbot_gz/world/cube</uri>
-    </include>
-
-    <!-- drop zone marker (static, just visual) -->
-    <model name="drop_zone">
-      <static>true</static>
-      <pose>0.0 -0.5 0.001 0 0 0</pose>
-      <link name="link">
-        <visual name="visual">
-          <geometry><box><size>0.15 0.15 0.002</size></box></geometry>
-          <material>
-            <ambient>0 1 0 0.5</ambient>
-            <diffuse>0 1 0 0.5</diffuse>
-          </material>
-        </visual>
-      </link>
-    </model>
 
   </world>
 </sdf>
